@@ -19,3 +19,24 @@ function startQuiz() {
     questionsEl.classList.remove('hide');
     getQuestion();
 }
+
+function getQuestion() {
+    // get current question object from array
+    const currentQuestion = questions[currentQuestionIndex];
+    // update title with current question
+    document.getElementById('question-title').textContent = currentQuestion.title;
+    // clear out any old question choices
+    choicesEl.innerHTML = '';
+    // loop over choices
+    currentQuestion.choices.forEach(function(choice, i) {
+      // create new button for each choice
+    const choiceNode = document.createElement('button');
+    choiceNode.setAttribute('class', 'choice');
+    choiceNode.setAttribute('value', choice);
+    choiceNode.textContent = i + 1 + '. ' + choice;
+      // attach click event listener to each choice
+    choiceNode.onclick = questionClick;
+      // display on the page
+    choicesEl.appendChild(choiceNode);
+    });
+}
